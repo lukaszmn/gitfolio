@@ -63,6 +63,14 @@ To order the sorted repos provide `--order [orderBy]` argument while building. W
 $ gitfolio build <username> --sort star --order desc
 ```
 
+#### Hiding statistics
+
+It is possible to hide repository statistics (stars and forks) by providing `--no-stats` argument while building:
+
+```sh
+$ gitfolio build <username> --no-stats
+```
+
 #### Customize Themes
 
 Themes are specified using the `--theme [theme-name]` flag when running the `build` command. The available themes are

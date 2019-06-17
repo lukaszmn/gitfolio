@@ -29,7 +29,7 @@ function convertToEmoji(text) {
     }
 }
 
-module.exports.updateHTML = (username, sort, order, includeFork) => {
+module.exports.updateHTML = (username, sort, order, includeFork, includeStats) => {
     //add data to assets/index.html
     jsdom.fromFile(`${__dirname}/assets/index.html`, options).then(function (dom) {
         let window = dom.window, document = window.document;
@@ -72,8 +72,8 @@ module.exports.updateHTML = (username, sort, order, includeFork) => {
                             </div>
                             <div class="bottom_section">
                                 <span style="display:${repos[i].language == null ? 'none' : 'inline-block'};"><i class="fas fa-code"></i>&nbsp; ${repos[i].language}</span>
-                                <span><i class="fas fa-star"></i>&nbsp; ${repos[i].stargazers_count}</span>
-                                <span><i class="fas fa-code-branch"></i>&nbsp; ${repos[i].forks_count}</span>
+                                <span style="display:${includeStats ? 'inline': 'none'}"><i class="fas fa-star"></i>&nbsp; ${repos[i].stargazers_count}</span>
+                                <span style="display:${includeStats ? 'inline': 'none'}"><i class="fas fa-code-branch"></i>&nbsp; ${repos[i].forks_count}</span>
                             </div>
                         </section>
                         </a>`;
@@ -89,8 +89,8 @@ module.exports.updateHTML = (username, sort, order, includeFork) => {
                                 </div>
                                 <div class="bottom_section">
                                     <span style="display:${repos[i].language == null ? 'none' : 'inline-block'};"><i class="fas fa-code"></i>&nbsp; ${repos[i].language}</span>
-                                    <span><i class="fas fa-star"></i>&nbsp; ${repos[i].stargazers_count}</span>
-                                    <span><i class="fas fa-code-branch"></i>&nbsp; ${repos[i].forks_count}</span>
+                                    <span style="display:${includeStats ? 'inline': 'none'}"><i class="fas fa-star"></i>&nbsp; ${repos[i].stargazers_count}</span>
+                                    <span style="display:${includeStats ? 'inline': 'none'}"><i class="fas fa-code-branch"></i>&nbsp; ${repos[i].forks_count}</span>
                                 </div>
                             </section>
                             </a>`;
