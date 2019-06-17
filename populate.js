@@ -116,8 +116,26 @@ module.exports.updateHTML = (username, sort, order, includeFork) => {
                 <span style="display:${user.blog == null || !user.blog ? 'none' : 'block'};"><i class="fas fa-link"></i> &nbsp; <a href="${user.blog}">${user.blog}</a></span>
                 <span style="display:${user.location == null || !user.location ? 'none' : 'block'};"><i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp; ${user.location}</span>
                 <span style="display:${user.hireable == false || !user.hireable ? 'none' : 'block'};"><i class="fas fa-user-tie"></i> &nbsp;&nbsp; Available for hire</span>`;
-                //add data to config.json
                 const data = await getConfig();
+                
+                // labels
+                let myWork = 'Work.';
+                let myForks = 'Forks.';
+                let myBlog = 'Blog.';
+                let myFooter = "<a href='https://github.com/imfunniee' target='_blank'>made on earth by a human</a>";
+                const labels = data[0].labels;
+                if (labels) {
+                    myWork = labels.work === undefined ? myWork : labels.work;
+                    myForks = labels.forks === undefined ? myForks : labels.forks;
+                    myBlog = labels.blog === undefined ? myBlog : labels.blog;
+                    myFooter = labels.footer === undefined ? myFooter : labels.footer;
+                }
+                document.getElementById('work').getElementsByTagName('h1')[0].innerHTML = myWork;
+                document.getElementById('forks').getElementsByTagName('h1')[0].innerHTML = myForks;
+                document.getElementById('blog_section').getElementsByTagName('h1')[0].innerHTML = myBlog;
+                document.getElementById('footer').innerHTML = myFooter;
+
+                //add data to config.json
                 data[0].username = user.login;
                 data[0].name = user.name;
                 data[0].userimg = user.avatar_url;

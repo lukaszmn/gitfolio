@@ -87,6 +87,11 @@ $ gitfolio build <username> --background https://images.unsplash.com/photo-15572
 You could also add in your custom CSS inside `index.css` to give it a more personal feel.
 
 
+#### Customize labels
+
+Some labels can also be changed, but it requires editing the `/dist/config.json` file and changing `labels` property.
+
+
 ### Let's Publish
 
 Head over to GitHub and create a new repository named `username.github.io`, where username is your username. Push the files inside`/dist` folder to repo you just created.
