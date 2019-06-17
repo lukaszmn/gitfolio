@@ -19,6 +19,7 @@ program
     .option('-s, --sort [sort]', 'set default sort for repository', 'created')
     .option('-o, --order [order]', 'set default order on sort', 'asc')
     .option('-c, --no-stats', 'hide repository statistics: stars and forks')
+    .option('-h, --homepage', 'use homepage instead of repository link')
     .action(buildCommand)
 
 program

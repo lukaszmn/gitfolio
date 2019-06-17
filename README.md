@@ -71,6 +71,16 @@ It is possible to hide repository statistics (stars and forks) by providing `--n
 $ gitfolio build <username> --no-stats
 ```
 
+#### Link to repository homepage
+
+By default link to repository point to the GitHub page.
+If a repository contains a home page, it can be used as the destination instead.
+You can configure it with `--homepage` argument while building:
+
+```sh
+$ gitfolio build <username> --homepage
+```
+
 #### Customize Themes
 
 Themes are specified using the `--theme [theme-name]` flag when running the `build` command. The available themes are

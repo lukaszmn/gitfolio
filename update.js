@@ -8,11 +8,12 @@ async function updateCommand() {
     var order = data[0].order;
     var includeFork = data[0].includeFork;
     var includeStats = data[0].includeStats;
+    var homepageLink = data[0].homepageLink;
     if(username == null || sort == null || order == null || includeFork == null){
         console.log("username not found in config.json, please run build command before using update");
         return;
     }
-    updateHTML(username, sort, order, includeFork, includeStats);
+    updateHTML(username, sort, order, includeFork, includeStats, homepageLink);
 }
 
 module.exports = {

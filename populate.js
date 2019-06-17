@@ -29,7 +29,7 @@ function convertToEmoji(text) {
     }
 }
 
-module.exports.updateHTML = (username, sort, order, includeFork, includeStats) => {
+module.exports.updateHTML = (username, sort, order, includeFork, includeStats, homepageLink) => {
     //add data to assets/index.html
     jsdom.fromFile(`${__dirname}/assets/index.html`, options).then(function (dom) {
         let window = dom.window, document = window.document;
@@ -62,9 +62,14 @@ module.exports.updateHTML = (username, sort, order, includeFork, includeStats) =
                     } while(tempRepos.length == 100);
                 }
                 for (var i = 0; i < repos.length; i++) {
+                    let repoUrl = repos[i].html_url;
+                    if (homepageLink && repos[i].homepage) {
+                        repoUrl = repos[i].homepage;
+                    }
+
                     if(repos[i].fork == false){
                         document.getElementById("work_section").innerHTML += `
-                        <a href="${repos[i].html_url}" target="_blank">
+                        <a href="${repoUrl}" target="_blank">
                         <section>
                             <div class="section_title">${repos[i].name}</div>
                             <div class="about_section">
@@ -81,7 +86,7 @@ module.exports.updateHTML = (username, sort, order, includeFork, includeStats) =
                         if(includeFork == true){
                             document.getElementById("forks").style.display = "block";
                             document.getElementById("forks_section").innerHTML += `
-                            <a href="${repos[i].html_url}" target="_blank">
+                            <a href="${repoUrl}" target="_blank">
                             <section>
                                 <div class="section_title">${repos[i].name}</div>
                                 <div class="about_section">
