@@ -63,25 +63,29 @@ async function populateCSS({
     await fs.writeFileAsync(config, JSON.stringify(data, null, ' '));
 }
 
-async function populateConfig(sort, order, includeFork, includeStats, homepageLink) {
+async function populateConfig(sort, order, includeFork, includeStats, homepageLink, useSpaces) {
     const data = await getConfig();
     data[0].sort = sort;
     data[0].order = order;
     data[0].includeFork = includeFork;
     data[0].includeStats = includeStats;
     data[0].homepageLink = homepageLink;
+    data[0].useSpaces = useSpaces;
     await fs.writeFileAsync(config, JSON.stringify(data, null, ' '));
 }
 
 async function buildCommand(username, program) {
     await populateCSS(program);
+
     let sort = program.sort ? program.sort : 'created';
     let order = program.order ? program.order : "asc";
     let includeFork = program.fork ? true : false;
     let includeStats = program.stats ? true : false;
     let homepageLink = program.homepage ? true : false;
-    await populateConfig(sort, order, includeFork, includeStats, homepageLink);
-    updateHTML(('%s', username), sort, order, includeFork, includeStats, homepageLink);
+    let useSpaces = program.spaces ? true : false;
+
+    await populateConfig(sort, order, includeFork, includeStats, homepageLink, useSpaces);
+    updateHTML(('%s', username), sort, order, includeFork, includeStats, homepageLink, useSpaces);
 }
 
 module.exports = {

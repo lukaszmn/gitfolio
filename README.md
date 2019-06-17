@@ -81,6 +81,14 @@ You can configure it with `--homepage` argument while building:
 $ gitfolio build <username> --homepage
 ```
 
+#### Use spaces in repository name
+
+You can replace dashes `-` and underscores `_` with spaces in repository names to make them more readable. Use the `--spaces` option while building:
+
+```sh
+$ gitfolio build <username> --spaces
+```
+
 #### Customize Themes
 
 Themes are specified using the `--theme [theme-name]` flag when running the `build` command. The available themes are

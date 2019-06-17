@@ -29,7 +29,7 @@ function convertToEmoji(text) {
     }
 }
 
-module.exports.updateHTML = (username, sort, order, includeFork, includeStats, homepageLink) => {
+module.exports.updateHTML = (username, sort, order, includeFork, includeStats, homepageLink, useSpaces) => {
     //add data to assets/index.html
     jsdom.fromFile(`${__dirname}/assets/index.html`, options).then(function (dom) {
         let window = dom.window, document = window.document;
@@ -62,16 +62,22 @@ module.exports.updateHTML = (username, sort, order, includeFork, includeStats, h
                     } while(tempRepos.length == 100);
                 }
                 for (var i = 0; i < repos.length; i++) {
+
                     let repoUrl = repos[i].html_url;
                     if (homepageLink && repos[i].homepage) {
                         repoUrl = repos[i].homepage;
+                    }
+
+                    let repoName = repos[i].name;
+                    if (useSpaces) {
+                        repoName = repoName.replace(/[_-]/g, ' ');
                     }
 
                     if(repos[i].fork == false){
                         document.getElementById("work_section").innerHTML += `
                         <a href="${repoUrl}" target="_blank">
                         <section>
-                            <div class="section_title">${repos[i].name}</div>
+                            <div class="section_title">${repoName}</div>
                             <div class="about_section">
                             <span style="display:${repos[i].description == undefined ? 'none' : 'block'};">${convertToEmoji(repos[i].description)}</span>
                             </div>
@@ -88,7 +94,7 @@ module.exports.updateHTML = (username, sort, order, includeFork, includeStats, h
                             document.getElementById("forks_section").innerHTML += `
                             <a href="${repoUrl}" target="_blank">
                             <section>
-                                <div class="section_title">${repos[i].name}</div>
+                                <div class="section_title">${repoName}</div>
                                 <div class="about_section">
                                 <span style="display:${repos[i].description == undefined ? 'none' : 'block'};">${convertToEmoji(repos[i].description)}</span>
                                 </div>

@@ -20,6 +20,7 @@ program
     .option('-o, --order [order]', 'set default order on sort', 'asc')
     .option('-c, --no-stats', 'hide repository statistics: stars and forks')
     .option('-h, --homepage', 'use homepage instead of repository link')
+    .option('-p, --spaces', 'use spaces instead of - and _ in names')
     .action(buildCommand)
 
 program
