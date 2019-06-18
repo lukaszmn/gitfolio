@@ -89,6 +89,34 @@ You can replace dashes `-` and underscores `_` with spaces in repository names t
 $ gitfolio build <username> --spaces
 ```
 
+#### Custom links
+
+You can replace the default link in your GitHub profile with any number of links by providing the following section in `/dist/config.json` file:
+```json
+  "links": [
+   {
+    "icon": "fab fa-linkedin",
+    "url": "https://www.linkedin.com/in/username",
+    "text": "LinkedIn"
+   },
+   {
+    "icon": "fab fa-github",
+    "url": "https://github.com/username",
+    "text": "GitHub"
+   },
+   {
+    "icon": "fab fa-wordpress",
+    "url": "https://my-blog.com",
+    "text": "my-blog.com"
+   },
+   {
+    "icon": "fab fa-twitter",
+    "url": "https://twitter.com/username",
+    "text": "@username"
+   }
+  ]
+```
+
 #### Customize Themes
 
 Themes are specified using the `--theme [theme-name]` flag when running the `build` command. The available themes are

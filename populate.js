@@ -121,13 +121,25 @@ module.exports.updateHTML = (username, sort, order, includeFork, includeStats, h
                 //document.getElementById("github_link").href = `https://github.com/${user.login}`;
                 document.getElementById("userbio").innerHTML = convertToEmoji(user.bio);
                 document.getElementById("userbio").style.display = user.bio == null || !user.bio ? 'none' : 'block';
+
+                const data = await getConfig();
+                let links;
+                if (!data[0].links) {
+                    links = `<span style="display:${user.blog == null || !user.blog ? 'none' : 'block'};"><i class="fas fa-link"></i> &nbsp; <a href="${user.blog}">${user.blog}</a></span>`;
+                } else {
+                    links = data[0].links.reduce(function(previousValue, currentValue, index, array) {
+                        const icon = currentValue.icon || 'fas fa-link';
+                        const link = `<span style="display:block"><i class="${icon}"></i> &nbsp; <a href="${currentValue.url}">${currentValue.text}</a></span>`;
+                        return previousValue + link;
+                    }, '');
+                }
+
                 document.getElementById("about").innerHTML = `
                 <span style="display:${user.company == null || !user.company ? 'none' : 'block'};"><i class="fas fa-users"></i> &nbsp; ${user.company}</span>
                 <span style="display:${user.email == null || !user.email ? 'none' : 'block'};"><i class="fas fa-envelope"></i> &nbsp; ${user.email}</span>
-                <span style="display:${user.blog == null || !user.blog ? 'none' : 'block'};"><i class="fas fa-link"></i> &nbsp; <a href="${user.blog}">${user.blog}</a></span>
+                ${links}
                 <span style="display:${user.location == null || !user.location ? 'none' : 'block'};"><i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp; ${user.location}</span>
                 <span style="display:${user.hireable == false || !user.hireable ? 'none' : 'block'};"><i class="fas fa-user-tie"></i> &nbsp;&nbsp; Available for hire</span>`;
-                const data = await getConfig();
                 
                 // labels
                 let myWork = 'Work.';
